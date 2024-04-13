@@ -4,6 +4,7 @@ import { Box, Container, Flex, Heading } from "@radix-ui/themes";
 import { useState } from "react";
 import { Counter } from "./Counter";
 import { CreateCounter } from "./CreateCounter";
+import { DeepBook } from "./DeepBook";
 
 function App() {
   const currentAccount = useCurrentAccount();
@@ -54,6 +55,7 @@ function App() {
           )}
         </Container>
       </Container>
+      <DeepBook />
     </>
   );
 }
