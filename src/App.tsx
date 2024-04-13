@@ -68,16 +68,6 @@ function App() {
       <hr />
       <br />
 
-      <Swap />
-
-      <hr />
-      <br />
-
-      <Deposit />
-
-      <hr />
-      <br />
-
       <DndProvider backend={HTML5Backend}>
         <Example />
       </DndProvider>
