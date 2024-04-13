@@ -1,13 +1,15 @@
 import update from 'immutability-helper'
-import type { FC } from 'react'
-import { memo, useCallback, useState } from 'react'
+import type { FC, ReactElement } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
 
 import { Card } from './Card'
 import { ItemTypes } from './ItemTypes'
+import { Swap } from '../Swap'
+import { Deposit } from '../Deposit'
 
 const style = {
-    width: 400,
+
 }
 
 export interface ContainerState {
@@ -18,30 +20,17 @@ const ITEMS = [
     {
         id: 1,
         text: 'Write a cool JS library',
+        component: <Swap />
     },
     {
         id: 2,
         text: 'Make it generic enough',
+        component: <Deposit />
     },
     {
         id: 3,
         text: 'Write README',
-    },
-    {
-        id: 4,
-        text: 'Create some examples',
-    },
-    {
-        id: 5,
-        text: 'Spam in Twitter and IRC to promote it',
-    },
-    {
-        id: 6,
-        text: '???',
-    },
-    {
-        id: 7,
-        text: 'PROFIT',
+        component: <Deposit />
     },
 ]
 
@@ -53,6 +42,7 @@ export const Container: FC = memo(function Container() {
             const card = cards.filter((c) => `${c.id}` === id)[0] as {
                 id: number
                 text: string
+                component: ReactElement
             }
             return {
                 card,
@@ -82,6 +72,7 @@ export const Container: FC = memo(function Container() {
         <div ref={drop} style={style}>
             {cards.map((card) => (
                 <Card
+                    component={card.component}
                     key={card.id}
                     id={`${card.id}`}
                     text={card.text}

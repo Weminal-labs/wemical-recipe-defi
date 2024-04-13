@@ -79,7 +79,7 @@ export default function index() {
   useEffect(() => {
     async function fetchPools() {
       const resp = await instance.get("/pools");
-      console.log(resp.data);
+      // console.log(resp.data);
       // CORS error
       // const allPools = await pools.getAllPools();
       // console.log(allPools);

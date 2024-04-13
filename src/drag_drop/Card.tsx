@@ -1,21 +1,21 @@
 import type { CSSProperties, FC } from 'react'
-import { memo } from 'react'
+import React, { memo } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
 import { ItemTypes } from './ItemTypes'
+import { Swap } from '../Swap'
+import { Deposit } from '../Deposit'
+
 
 const style: CSSProperties = {
-    border: '1px dashed gray',
-    padding: '0.5rem 1rem',
-    marginBottom: '.5rem',
-    color: 'black',
-    backgroundColor: 'white',
-    cursor: 'move',
+  
 }
+
 
 export interface CardProps {
     id: string
     text: string
+    component: React.ReactNode,
     moveCard: (id: string, to: number) => void
     findCard: (id: string) => { index: number }
 }
@@ -28,6 +28,7 @@ interface Item {
 export const Card: FC<CardProps> = memo(function Card({
     id,
     text,
+    component,
     moveCard,
     findCard,
 }) {
@@ -67,6 +68,7 @@ export const Card: FC<CardProps> = memo(function Card({
     return (
         <div ref={(node) => drag(drop(node))} style={{ ...style, opacity }}>
             {text}
+            {component}
         </div>
     )
 })
