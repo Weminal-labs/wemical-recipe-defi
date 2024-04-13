@@ -2,12 +2,15 @@ import { ConnectButton, useCurrentAccount } from "@mysten/dapp-kit";
 import { isValidSuiObjectId } from "@mysten/sui.js/utils";
 import { Box, Container, Flex, Heading } from "@radix-ui/themes";
 import { useState } from "react";
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import { Counter } from "./Counter";
 import { CreateCounter } from "./CreateCounter";
 import { DeepBook } from "./DeepBook";
 import AfterMathComponent from "./Aftermath";
 import { Swap } from "./Swap";
 import { Deposit } from "./Deposit";
+import Example from './drag_drop/example'
 
 function App() {
   const currentAccount = useCurrentAccount();
@@ -58,10 +61,10 @@ function App() {
           )}
         </Container>
       </Container>
-      
+
       <DeepBook />
       <AfterMathComponent />
-      
+
       <hr />
       <br />
 
@@ -69,8 +72,15 @@ function App() {
 
       <hr />
       <br />
-      
+
       <Deposit />
+
+      <hr />
+      <br />
+
+      <DndProvider backend={HTML5Backend}>
+        <Example />
+      </DndProvider>
     </>
   );
 }

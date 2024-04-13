@@ -18,7 +18,10 @@
     "@tanstack/react-query": "^5.0.0",
     "aftermath-ts-sdk": "^1.1.53",
     "axios": "^1.6.8",
+    "immutability-helper": "^3.1.1",
     "react": "^18.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
