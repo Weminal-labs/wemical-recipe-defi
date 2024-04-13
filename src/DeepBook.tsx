@@ -61,7 +61,7 @@ export function DeepBook() {
     return (
         <>
             <div>DeepBook</div>
-            <button onClick={executePTB}>
+            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={executePTB}>
                 Execute PTB
             </button>
         </>

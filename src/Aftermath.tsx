@@ -175,8 +175,8 @@ export default function index() {
   return (
     <>
       <div>Aftermath</div>
-      <button onClick={handleStake}>Stake</button>
-      <button onClick={handleSwap}>Swap</button>
+      <button type="button" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleStake}>Stake</button>
+      <button type="button" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleSwap}>Swap</button>
     </>
   );
 }

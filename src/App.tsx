@@ -6,6 +6,8 @@ import { Counter } from "./Counter";
 import { CreateCounter } from "./CreateCounter";
 import { DeepBook } from "./DeepBook";
 import AfterMathComponent from "./Aftermath";
+import { Swap } from "./Swap";
+import { Deposit } from "./Deposit";
 
 function App() {
   const currentAccount = useCurrentAccount();
@@ -56,8 +58,19 @@ function App() {
           )}
         </Container>
       </Container>
+      
       <DeepBook />
       <AfterMathComponent />
+      
+      <hr />
+      <br />
+
+      <Swap />
+
+      <hr />
+      <br />
+      
+      <Deposit />
     </>
   );
 }
