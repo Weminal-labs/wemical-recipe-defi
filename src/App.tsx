@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Counter } from "./Counter";
 import { CreateCounter } from "./CreateCounter";
 import { DeepBook } from "./DeepBook";
+import AfterMathComponent from "./Aftermath";
 
 function App() {
   const currentAccount = useCurrentAccount();
@@ -56,6 +57,7 @@ function App() {
         </Container>
       </Container>
       <DeepBook />
+      <AfterMathComponent />
     </>
   );
 }
