@@ -3,7 +3,7 @@ import type { FC, ReactElement } from 'react'
 import React, { memo, useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
 
-import { Card } from './Card'
+import { Action } from './Action'
 import { ItemTypes } from './ItemTypes'
 import { Swap } from '../Swap'
 import { Deposit } from '../Deposit'
@@ -13,71 +13,66 @@ const style = {
 }
 
 export interface ContainerState {
-    cards: any[]
+    actions: any[]
 }
 
 const ITEMS = [
     {
         id: 1,
-        text: 'Write a cool JS library',
         component: <Swap />
     },
     {
         id: 2,
-        text: 'Make it generic enough',
         component: <Deposit />
     },
     {
         id: 3,
-        text: 'Write README',
         component: <Deposit />
     },
 ]
 
 export const Container: FC = memo(function Container() {
-    const [cards, setCards] = useState(ITEMS)
+    const [actions, setActions] = useState(ITEMS)
 
-    const findCard = useCallback(
+    const findAction = useCallback(
         (id: string) => {
-            const card = cards.filter((c) => `${c.id}` === id)[0] as {
+            const action = actions.filter((a) => `${a.id}` === id)[0] as {
                 id: number
-                text: string
                 component: ReactElement
             }
             return {
-                card,
-                index: cards.indexOf(card),
+                action,
+                index: actions.indexOf(action),
             }
         },
-        [cards],
+        [actions],
     )
 
-    const moveCard = useCallback(
+    const moveAction = useCallback(
         (id: string, atIndex: number) => {
-            const { card, index } = findCard(id)
-            setCards(
-                update(cards, {
+            const { action, index } = findAction(id)
+            setActions(
+                update(actions, {
                     $splice: [
                         [index, 1],
-                        [atIndex, 0, card],
+                        [atIndex, 0, action],
                     ],
                 }),
             )
         },
-        [findCard, cards, setCards],
+        [findAction, actions, setActions],
     )
 
-    const [, drop] = useDrop(() => ({ accept: ItemTypes.CARD }))
+    const [, drop] = useDrop(() => ({ accept: ItemTypes.ACTION }))
     return (
         <div ref={drop} style={style}>
-            {cards.map((card) => (
-                <Card
-                    component={card.component}
-                    key={card.id}
-                    id={`${card.id}`}
-                    text={card.text}
-                    moveCard={moveCard}
-                    findCard={findCard}
+            {actions.map((action) => (
+                <Action
+                    component={action.component}
+                    key={action.id}
+                    id={`${action.id}`}
+                    moveAction={moveAction}
+                    findAction={findAction}
                 />
             ))}
         </div>

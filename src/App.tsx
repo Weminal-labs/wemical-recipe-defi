@@ -8,9 +8,7 @@ import { Counter } from "./Counter";
 import { CreateCounter } from "./CreateCounter";
 import { DeepBook } from "./DeepBook";
 import AfterMathComponent from "./Aftermath";
-import { Swap } from "./Swap";
-import { Deposit } from "./Deposit";
-import Example from './drag_drop/example'
+import Example from './recipe_action'
 
 function App() {
   const currentAccount = useCurrentAccount();

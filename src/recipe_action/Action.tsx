@@ -3,21 +3,16 @@ import React, { memo } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
 import { ItemTypes } from './ItemTypes'
-import { Swap } from '../Swap'
-import { Deposit } from '../Deposit'
-
 
 const style: CSSProperties = {
-  
+
 }
 
-
-export interface CardProps {
+export interface ActionProps {
     id: string
-    text: string
     component: React.ReactNode,
-    moveCard: (id: string, to: number) => void
-    findCard: (id: string) => { index: number }
+    moveAction: (id: string, to: number) => void
+    findAction: (id: string) => { index: number }
 }
 
 interface Item {
@@ -25,17 +20,16 @@ interface Item {
     originalIndex: number
 }
 
-export const Card: FC<CardProps> = memo(function Card({
+export const Action: FC<ActionProps> = memo(function Action({
     id,
-    text,
     component,
-    moveCard,
-    findCard,
+    moveAction,
+    findAction,
 }) {
-    const originalIndex = findCard(id).index
+    const originalIndex = findAction(id).index
     const [{ isDragging }, drag] = useDrag(
         () => ({
-            type: ItemTypes.CARD,
+            type: ItemTypes.ACTION,
             item: { id, originalIndex },
             collect: (monitor) => ({
                 isDragging: monitor.isDragging(),
@@ -44,30 +38,29 @@ export const Card: FC<CardProps> = memo(function Card({
                 const { id: droppedId, originalIndex } = item
                 const didDrop = monitor.didDrop()
                 if (!didDrop) {
-                    moveCard(droppedId, originalIndex)
+                    moveAction(droppedId, originalIndex)
                 }
             },
         }),
-        [id, originalIndex, moveCard],
+        [id, originalIndex, moveAction],
     )
 
     const [, drop] = useDrop(
         () => ({
-            accept: ItemTypes.CARD,
+            accept: ItemTypes.ACTION,
             hover({ id: draggedId }: Item) {
                 if (draggedId !== id) {
-                    const { index: overIndex } = findCard(id)
-                    moveCard(draggedId, overIndex)
+                    const { index: overIndex } = findAction(id)
+                    moveAction(draggedId, overIndex)
                 }
             },
         }),
-        [findCard, moveCard],
+        [findAction, moveAction],
     )
 
     const opacity = isDragging ? 0 : 1
     return (
         <div ref={(node) => drag(drop(node))} style={{ ...style, opacity }}>
-            {text}
             {component}
         </div>
     )
