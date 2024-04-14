@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { SearchIcon } from "../../icons/SearchIcon";
 import { DashboardIcon } from "../../icons/DashboardIcon";
 import { BoxIcon } from "../../icons/BoxIcon";
@@ -13,8 +13,29 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Actions from '../../recipe_action/index'
 import { Swap } from "../../Swap";
+import { SwapAftermath } from "../../recipe_action/aftermath/SwapAftermath";
+import { DepositDeepBook } from "../../recipe_action/deepbook/DepositDeepBook";
+import { SwapDeepBook } from "../../recipe_action/deepbook/SwapDeepBook";
+import { WithdrawBase } from "../../recipe_action/deepbook/WithdrawBase";
 
 export const RecipeManagement = (): JSX.Element => {
+  const [selectedAction, setSelectedAction] = useState<number>(0);
+
+  const renderFormForEachAction = () => {
+    switch (selectedAction) {
+      case 1:
+        return <SwapAftermath />;
+      case 2:
+        return <DepositDeepBook />
+      case 3:
+        return <SwapDeepBook />
+      case 4:
+        return <WithdrawBase />
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="bg-black flex flex-row justify-center w-full">
       <div className="bg-black overflow-hidden w-[1920px] ">
@@ -58,7 +79,7 @@ export const RecipeManagement = (): JSX.Element => {
             </div>
             <div className="absolute top-[350px] left-[406px] w-[1150px] h-screen">
               <DndProvider backend={HTML5Backend}>
-                <Actions />
+                <Actions setSelectedAction={setSelectedAction} />
               </DndProvider>
             </div>
             <div className="absolute top-[34px] left-[406px] [font-family:'Specify_PERSONAL_Expanded-BoldItalic',Helvetica] font-bold italic text-white text-[24px] tracking-[0.48px] leading-[70px] whitespace-nowrap">
@@ -107,7 +128,7 @@ export const RecipeManagement = (): JSX.Element => {
             </div>
           </div>
           <div className="absolute w-[653px] h-[748px] top-[347px] left-[1371px]">
-            <Swap />
+            {selectedAction !== 0 && renderFormForEachAction()}
             {/* <div className="flex flex-wrap w-[482px] items-start gap-[117px_24px] p-[40px] absolute top-0 left-0 bg-[#2828284c] rounded-[20px] overflow-hidden border border-solid border-[#ffffff1a]">
               <div className="relative w-[246.09px] mt-[-1.00px] [font-family:'BT_Beau_Sans-Regular',Helvetica] font-normal text-white text-[32px] tracking-[0] leading-[38.4px]">
                 Create a pool

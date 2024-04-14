@@ -39,8 +39,19 @@ const ITEMS = [
     },
 ]
 
-export const Container: FC = memo(function Container() {
+interface ContainerProps {
+    setSelectedAction: React.Dispatch<React.SetStateAction<number>>
+}
+
+export const Container = memo(function Container({ setSelectedAction }: ContainerProps) {
     const [actions, setActions] = useState(ITEMS)
+
+    const selectAction = useCallback(
+        (id: string) => {
+            setSelectedAction(Number(id))
+        },
+        [setSelectedAction],
+    )
 
     const findAction = useCallback(
         (id: string) => {
@@ -81,6 +92,7 @@ export const Container: FC = memo(function Container() {
                     id={`${action.id}`}
                     moveAction={moveAction}
                     findAction={findAction}
+                    selectAction={selectAction}
                 />
             ))}
         </div>

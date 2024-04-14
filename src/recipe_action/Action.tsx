@@ -13,6 +13,7 @@ export interface ActionProps {
     component: React.ReactNode,
     moveAction: (id: string, to: number) => void
     findAction: (id: string) => { index: number }
+    selectAction: (id: string) => void
 }
 
 interface Item {
@@ -25,6 +26,7 @@ export const Action: FC<ActionProps> = memo(function Action({
     component,
     moveAction,
     findAction,
+    selectAction
 }) {
     const originalIndex = findAction(id).index
     const [{ isDragging }, drag] = useDrag(
@@ -60,7 +62,7 @@ export const Action: FC<ActionProps> = memo(function Action({
 
     const opacity = isDragging ? 0 : 1
     return (
-        <div ref={(node) => drag(drop(node))} style={{ ...style, opacity }}>
+        <div onClick={() => selectAction(id)} ref={(node) => drag(drop(node))} style={{ ...style, opacity }}>
             {component}
         </div>
     )
