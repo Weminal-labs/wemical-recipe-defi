@@ -25,6 +25,7 @@ import { DepositDeepBookForm } from "../../recipe_action/deepbook/deposit/Deposi
 import { SwapDeepBookForm } from "../../recipe_action/deepbook/swap/SwapDeepBookForm";
 import { WithdrawBaseForm } from "../../recipe_action/deepbook/withdraw/WithdrawBaseForm";
 import { Cetus } from "../../Cetus";
+import { Turbo } from "../../Turbo";
 
 export const RecipeManagement = (): JSX.Element => {
   const currentAccount = useCurrentAccount();
@@ -147,7 +148,6 @@ export const RecipeManagement = (): JSX.Element => {
 
   return (
     <div className="bg-black flex flex-row justify-center w-full">
-      <Cetus />
       <div className="bg-black overflow-hidden w-[1920px] ">
         <div className="relative w-[2024px] h-[1280px] left-[-69px]">
           <div className="absolute w-[1575px] h-[1280px] top-0 left-0">

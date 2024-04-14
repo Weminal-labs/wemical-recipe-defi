@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react'
-import { retrievelAllPools, swapTest } from './api/cetus'
+import { getPools, turboAddLiquidity, turboSwap } from './api/turbo'
 import { useSignAndExecuteTransactionBlock } from '@mysten/dapp-kit';
 
-export const Cetus = () => {
+export const Turbo = () => {
 
     const { mutate: signAndExecute } = useSignAndExecuteTransactionBlock();
 
+
     useEffect(() => {
-        // async function test() {
-        //     let data = await retrievelAllPools()
-        //     console.log(data)
-        // }
-        // test()
+        async function test() {
+            const pools = await getPools()
+            console.log(pools)
+        }
+        test()
     }, [])
 
     const handleSwap = async () => {
         try {
-            const txb = await swapTest();
+            // const txb = await turboSwap();
+            const txb = await turboAddLiquidity();
 
             signAndExecute(
                 {
@@ -45,8 +47,8 @@ export const Cetus = () => {
 
     return (
         <>
-            <div>Cetus</div>
-            <button onClick={handleSwap}>Handle Swap</button>
+            <div>Turbo</div>
+            <button onClick={handleSwap}>Turbo Swap</button>
         </>
     )
 }
