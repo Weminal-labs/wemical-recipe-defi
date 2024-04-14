@@ -5,8 +5,6 @@ import { useDrop } from 'react-dnd'
 
 import { Action } from './Action'
 import { ItemTypes } from './ItemTypes'
-import { Swap } from '../Swap'
-import { Deposit } from '../Deposit'
 import { SwapAftermath } from './aftermath/swap/SwapAftermath'
 import { DepositDeepBook } from './deepbook/deposit/DepositDeepBook'
 import { SwapDeepBook } from './deepbook/swap/SwapDeepBook'
