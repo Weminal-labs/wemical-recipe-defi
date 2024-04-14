@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Deposit = () => {
     return (
-        <div className="flex flex-col items-start gap-[24px] p-[40px] relative bg-[#2828284c] border border-solid border-[#ffffff1a] w-[50%]">
+        <div className="flex flex-col items-start gap-[24px] p-[40px] relative bg-[#2828284c] border border-solid border-[#ffffff1a] w-[50%] mb-5">
             <div className="flex items-start justify-between relative self-stretch w-full flex-[0_0_auto]">
                 <div className="relative flex-1 mt-[-1.00px] [font-family:'BT_Beau_Sans-Regular',Helvetica] font-normal text-[32px] tracking-[0] leading-[38.4px]">
                     Deposit base coin

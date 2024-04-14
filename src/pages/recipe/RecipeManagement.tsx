@@ -8,15 +8,19 @@ import { SwapIcon } from "../../icons/SwapIcon";
 import { AddElementIcon } from "../../icons/AddElementIcon";
 import { BarcodeIcon } from "../../icons/BarcodeIcon";
 import { ExchangeIcon } from "../../icons/ExchangeIcon";
+import { ConnectButton } from "@mysten/dapp-kit";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import Actions from '../../recipe_action/index'
 
 export const RecipeManagement = (): JSX.Element => {
   return (
     <div className="bg-black flex flex-row justify-center w-full">
-      <div className="bg-black overflow-hidden w-[1920px] h-[1080px]">
+      <div className="bg-black overflow-hidden w-[1920px] ">
         <div className="relative w-[2024px] h-[1280px] left-[-69px]">
           <div className="absolute w-[1575px] h-[1280px] top-0 left-0">
             <div className="absolute w-[983px] h-[1280px] top-0 left-0">
-              <div className="flex flex-col w-[300px] h-[1080px] items-center gap-[var(--collection-1-4)] pr-[var(--collection-1-1)] pl-[var(--collection-1-1)] py-[60px] absolute top-0 left-[69px] border-r [border-right-style:solid] border-[#3b3b3b]">
+              <div className="flex flex-col w-[300px] h-full items-center gap-[var(--collection-1-4)] pr-[var(--collection-1-1)] pl-[var(--collection-1-1)] py-[60px] absolute top-0 left-[69px] border-r [border-right-style:solid] border-[#3b3b3b]">
                 <div className="flex items-center gap-[var(--collection-1-1)] pt-[var(--collection-1-1)] pb-[var(--collection-1-1)] px-[12px] relative self-stretch w-full flex-[0_0_auto] rounded-[13px] border border-solid border-[#8d8b8c]">
                   <SearchIcon className="!relative !w-[24px] !h-[24px]" />
                   <div className="relative w-fit font-subtitle font-[number:var(--subtitle-font-weight)] text-[#8d8b8c] text-[length:var(--subtitle-font-size)] tracking-[var(--subtitle-letter-spacing)] leading-[var(--subtitle-line-height)] whitespace-nowrap [font-style:var(--subtitle-font-style)]">
@@ -50,6 +54,11 @@ export const RecipeManagement = (): JSX.Element => {
                   Drag, drop, change the order of actions in the box
                 </p>
               </div>
+            </div>
+            <div className="absolute top-[350px] left-[406px] w-full h-screen overflow-y-scroll">
+              <DndProvider backend={HTML5Backend}>
+                <Actions />
+              </DndProvider>
             </div>
             <div className="absolute top-[34px] left-[406px] [font-family:'Specify_PERSONAL_Expanded-BoldItalic',Helvetica] font-bold italic text-white text-[24px] tracking-[0.48px] leading-[70px] whitespace-nowrap">
               wemical
@@ -157,7 +166,7 @@ export const RecipeManagement = (): JSX.Element => {
           </div>
           <div className="inline-flex items-center justify-center gap-[10px] px-[20px] py-[12px] absolute top-[46px] left-[1487px] bg-white rounded-[31px]">
             <div className="relative w-fit mt-[-1.00px] [font-family:'BT_Beau_Sans-Regular',Helvetica] font-normal text-black text-[16px] tracking-[0] leading-[normal]">
-              Connect wallet
+              <ConnectButton />
             </div>
           </div>
         </div>

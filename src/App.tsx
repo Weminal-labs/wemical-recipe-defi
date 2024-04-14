@@ -61,14 +61,7 @@ function App() {
       </Container>
 
       <DeepBook />
-      <AfterMathComponent />
-
-      <hr />
-      <br />
-
-      <DndProvider backend={HTML5Backend}>
-        <Actions />
-      </DndProvider>
+      <AfterMathComponent />      
     </>
   );
 }
