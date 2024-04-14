@@ -16,8 +16,6 @@ export const RecipeManagement = (): JSX.Element => {
         <div className="relative w-[2024px] h-[1280px] left-[-69px]">
           <div className="absolute w-[1575px] h-[1280px] top-0 left-0">
             <div className="absolute w-[983px] h-[1280px] top-0 left-0">
-              <div className="w-[582px] h-[582px] top-[203px] left-[310px] bg-[#4200ff1a] rounded-[291px] absolute blur-[250px]" />
-              <div className="w-[620px] h-[620px] top-[660px] left-0 bg-[#3300ff1a] rounded-[310px] absolute blur-[250px]" />
               <div className="flex flex-col w-[300px] h-[1080px] items-center gap-[var(--collection-1-4)] pr-[var(--collection-1-1)] pl-[var(--collection-1-1)] py-[60px] absolute top-0 left-[69px] border-r [border-right-style:solid] border-[#3b3b3b]">
                 <div className="flex items-center gap-[var(--collection-1-1)] pt-[var(--collection-1-1)] pb-[var(--collection-1-1)] px-[12px] relative self-stretch w-full flex-[0_0_auto] rounded-[13px] border border-solid border-[#8d8b8c]">
                   <SearchIcon className="!relative !w-[24px] !h-[24px]" />
@@ -99,13 +97,12 @@ export const RecipeManagement = (): JSX.Element => {
             </div>
           </div>
           <div className="absolute w-[653px] h-[748px] top-[347px] left-[1371px]">
-            <div className="w-[620px] h-[620px] top-[128px] left-[33px] bg-[#3300ff1a] rounded-[310px] absolute blur-[250px]" />
             <div className="flex flex-wrap w-[482px] items-start gap-[117px_24px] p-[40px] absolute top-0 left-0 bg-[#2828284c] rounded-[20px] overflow-hidden border border-solid border-[#ffffff1a]">
-              <div className="relative w-[246.09px] mt-[-1.00px] [background:linear-gradient(180deg,rgb(255,255,255)_0%,rgb(191.1,191.1,191.1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] [font-family:'BT_Beau_Sans-Regular',Helvetica] font-normal text-transparent text-[32px] tracking-[0] leading-[38.4px]">
+              <div className="relative w-[246.09px] mt-[-1.00px] [font-family:'BT_Beau_Sans-Regular',Helvetica] font-normal text-white text-[32px] tracking-[0] leading-[38.4px]">
                 Create a pool
               </div>
               <div className="inline-flex items-center justify-center gap-[10px] relative flex-[0_0_auto]">
-                <div className="relative w-fit mt-[-1.00px] [background:linear-gradient(180deg,rgb(255,255,255)_0%,rgb(191.1,191.1,191.1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] [font-family:'BT_Beau_Sans-Regular',Helvetica] font-normal text-transparent text-[32px] text-right tracking-[0] leading-[38.4px] whitespace-nowrap">
+                <div className="relative w-fit mt-[-1.00px] [font-family:'BT_Beau_Sans-Regular',Helvetica] font-normal text-white text-[32px] text-right tracking-[0] leading-[38.4px] whitespace-nowrap">
                   #1
                 </div>
               </div>
