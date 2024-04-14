@@ -138,9 +138,9 @@ export const RecipeManagement = (): JSX.Element => {
       case 2:
         return <DepositDeepBookForm handleDone={handleDone} handleArgsForEachAction={handleArgsForEachAction} />
       case 3:
-        return <SwapDeepBookForm />
+        return <SwapDeepBookForm handleDone={handleDone} handleArgsForEachAction={handleArgsForEachAction} />
       case 4:
-        return <WithdrawBaseForm />
+        return <WithdrawBaseForm handleDone={handleDone} handleArgsForEachAction={handleArgsForEachAction} />
       default:
         return null;
     }

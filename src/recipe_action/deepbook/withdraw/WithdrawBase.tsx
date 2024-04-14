@@ -1,6 +1,10 @@
 import React from 'react'
 
-export const WithdrawBase = () => {
+interface WithdrawBaseProps {
+    amount: number
+}
+
+export const WithdrawBase = ({ amount }: WithdrawBaseProps) => {
     return (
         <div className="flex w-[577px] h-[60px] items-center gap-[60px] bg-[#6060604c] rounded-[12px] overflow-hidden border border-solid border-[#ffffff1a] mb-2">
             <div className="inline-flex flex-col items-center justify-center px-[40px] py-[16px] relative self-stretch flex-[0_0_auto] bg-white w-[124px]">
@@ -13,7 +17,7 @@ export const WithdrawBase = () => {
             </div>
             <div className="relative w-[168px] h-[24px]">
                 <div className="absolute -top-px left-0 [font-family:'BT_Beau_Sans-Medium',Helvetica] font-medium text-white text-[18px] tracking-[-0.36px] leading-[21.6px] whitespace-nowrap">
-                    100 SUI
+                    {amount} SUI
                 </div>
             </div>
         </div>

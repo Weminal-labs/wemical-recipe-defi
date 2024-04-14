@@ -1,11 +1,11 @@
 import React from 'react'
 
-interface DepositDeepBookFormProps {
+export interface ActionFormProps {
     handleDone: () => void
     handleArgsForEachAction: (id: any, args: any) => void
 }
 
-export const DepositDeepBookForm = ({ handleDone, handleArgsForEachAction }: DepositDeepBookFormProps) => {
+export const DepositDeepBookForm = ({ handleDone, handleArgsForEachAction }: ActionFormProps) => {
     const [amount, setAmount] = React.useState(0)
 
     const handleFinish = () => {

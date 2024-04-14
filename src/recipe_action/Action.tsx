@@ -71,8 +71,8 @@ export const Action: FC<ActionProps> = memo(function Action({
         <div onClick={() => selectAction(id)} ref={(node) => drag(drop(node))} style={{ ...style, opacity }}>
             {type === ActionType.SwapAftermath && <SwapAftermath amount={args.amount} isSuiToUsdc={args.isSuiToUsdc} />}
             {type === ActionType.DepositDeepBook && <DepositDeepBook amount={args.amount} />}
-            {type === ActionType.SwapDeepBook && <SwapDeepBook />}
-            {type === ActionType.WithdrawBase && <WithdrawBase />}
+            {type === ActionType.SwapDeepBook && <SwapDeepBook amount={args.amount} />}
+            {type === ActionType.WithdrawBase && <WithdrawBase amount={args.amount} />}
         </div>
     )
 })

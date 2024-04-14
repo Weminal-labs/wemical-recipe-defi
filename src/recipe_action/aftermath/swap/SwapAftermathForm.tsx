@@ -2,13 +2,9 @@ import React, { useEffect } from 'react'
 import { getSpotPrice, getSpotPriceOposite } from '../../../api/aftermath'
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
+import { ActionFormProps } from '../../deepbook/deposit/DepositDeepBookForm';
 
-interface SwapAftermathFormProps {
-    handleDone: () => void
-    handleArgsForEachAction: (id: any, args: any) => void
-}
-
-export const SwapAftermathForm = ({ handleDone, handleArgsForEachAction }: SwapAftermathFormProps) => {
+export const SwapAftermathForm = ({ handleDone, handleArgsForEachAction }: ActionFormProps) => {
     const [amount, setAmount] = React.useState(0)
     const [isSuiToUsdc, setIsSuiToUsdc] = React.useState(true)
     const [spotPrice, setSpotPrice] = React.useState(0)
