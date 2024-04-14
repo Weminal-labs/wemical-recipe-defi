@@ -8,7 +8,7 @@ import { ItemTypes } from './ItemTypes'
 import { Swap } from '../Swap'
 import { Deposit } from '../Deposit'
 import { SwapAftermath } from './aftermath/SwapAftermath'
-import { DepositDeepBook } from './deepbook/DepositDeepBook'
+import { DepositDeepBook } from './deepbook/deposit/DepositDeepBook'
 import { SwapDeepBook } from './deepbook/SwapDeepBook'
 import { WithdrawBase } from './deepbook/WithdrawBase'
 

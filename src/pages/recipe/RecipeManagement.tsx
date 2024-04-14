@@ -14,7 +14,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import Actions from '../../recipe_action/index'
 import { Swap } from "../../Swap";
 import { SwapAftermath } from "../../recipe_action/aftermath/SwapAftermath";
-import { DepositDeepBook } from "../../recipe_action/deepbook/DepositDeepBook";
+import { DepositDeepBook } from "../../recipe_action/deepbook/deposit/DepositDeepBook";
 import { SwapDeepBook } from "../../recipe_action/deepbook/SwapDeepBook";
 import { WithdrawBase } from "../../recipe_action/deepbook/WithdrawBase";
 import { createTxbSwap, getSpotPrice, getSpotPriceOposite } from "../../api/aftermath";
