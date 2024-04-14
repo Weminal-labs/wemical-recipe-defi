@@ -27,60 +27,60 @@ import { WithdrawBaseForm } from "../../recipe_action/deepbook/withdraw/Withdraw
 import { Cetus } from "../../Cetus";
 import { Turbo } from "../../Turbo";
 
+
+const ACTIONS = [
+  {
+    id: 1,
+    type: ActionType.SwapAftermath,
+    args: {
+      isSuiToUsdc: true,
+      amount: 0
+    }
+  },
+  {
+    id: 2,
+    type: ActionType.DepositDeepBook,
+    args: {
+      amount: 0
+    }
+  },
+  {
+    id: 3,
+    type: ActionType.SwapDeepBook,
+    args: {
+      amount: 0
+    }
+  },
+  {
+    id: 4,
+    type: ActionType.WithdrawBase,
+    args: {
+      amount: 0
+    }
+  },
+]
+
 export const RecipeManagement = (): JSX.Element => {
   const currentAccount = useCurrentAccount();
   const { mutate: signAndExecute } = useSignAndExecuteTransactionBlock();
   const { deepbookPackageId } = useNetworkVariables();
 
   const [selectedAction, setSelectedAction] = useState<number>(0);
-  const [actionsArgs, setActionsArgs] = useState<any[]>([
-    {
-      order: 1,
-      id: 1, // Aftermath swap
-      type: ActionType.SwapAftermath,
-      args: {
-        isSuiToUsdc: true,
-        amount: BigInt(1_423_837_387),
-      }
-    },
-    {
-      order: 2,
-      id: 2, // Deep book deposit
-      type: ActionType.DepositDeepBook,
-      args: {
+  const [actions, setActions] = useState(ACTIONS)
 
-      }
-    },
-    {
-      order: 3,
-      type: ActionType.SwapDeepBook,
-      id: 3, // Deep book swap
-      args: {
-
-      }
-    },
-    {
-      order: 4,
-      type: ActionType.WithdrawBase,
-      id: 4, // Deep book withdraw
-      args: {
-
-      }
-    }
-  ]);
-
-  const handleActionArgs = (id: any, args: any) => {
-    const newActionsArgs = actionsArgs.map((action) => {
+  const handleArgsForEachAction = (id: number, args: any) => {
+    setActions(actions.map(action => {
       if (action.id === id) {
         return {
           ...action,
+          component: <SwapAftermath isSuiToUsdc={args.isSuiToUsdc} amount={args.amount} />,
           args
         }
       }
       return action;
-    })
-    setActionsArgs(newActionsArgs);
+    }))
   }
+
 
   const handleExecute = async () => {
     // for (let i = 0; i < actionsArgs.length; i++) {
@@ -134,9 +134,9 @@ export const RecipeManagement = (): JSX.Element => {
   const renderFormForEachAction = () => {
     switch (selectedAction) {
       case 1:
-        return <SwapAftermathForm handleDone={handleDone} handleActionArgs={handleActionArgs} />;
+        return <SwapAftermathForm handleDone={handleDone} handleArgsForEachAction={handleArgsForEachAction} />;
       case 2:
-        return <DepositDeepBookForm />
+        return <DepositDeepBookForm handleDone={handleDone} handleArgsForEachAction={handleArgsForEachAction} />
       case 3:
         return <SwapDeepBookForm />
       case 4:
@@ -189,7 +189,7 @@ export const RecipeManagement = (): JSX.Element => {
             </div>
             <div className="absolute top-[350px] left-[406px] w-[1150px] h-screen">
               <DndProvider backend={HTML5Backend}>
-                <Actions setSelectedAction={setSelectedAction} actionsArgs={actionsArgs} />
+                <Actions setSelectedAction={setSelectedAction} actions={actions} setActions={setActions} />
               </DndProvider>
               <button onClick={handleExecute}>Execute</button>
             </div>

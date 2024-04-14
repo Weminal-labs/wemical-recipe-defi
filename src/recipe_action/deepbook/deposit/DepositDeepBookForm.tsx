@@ -1,7 +1,17 @@
 import React from 'react'
 
-export const DepositDeepBookForm = () => {
+interface DepositDeepBookFormProps {
+    handleDone: () => void
+    handleArgsForEachAction: (id: any, args: any) => void
+}
+
+export const DepositDeepBookForm = ({ handleDone, handleArgsForEachAction }: DepositDeepBookFormProps) => {
     const [amount, setAmount] = React.useState(0)
+
+    const handleFinish = () => {
+        handleDone()
+        handleArgsForEachAction(2, { amount: amount })
+    }
 
     return (
         <div className="flex flex-col items-start gap-[24px] p-[40px] relative bg-[#2828284c] border border-solid border-[#ffffff1a] w-[482px] mb-5">
@@ -38,11 +48,11 @@ export const DepositDeepBookForm = () => {
                 </div>
             </div>
             <div className="flex items-center justify-end gap-[10px] relative self-stretch w-full flex-[0_0_auto]">
-                <div className="inline-flex items-center justify-center gap-[10px] px-[20px] py-[12px] relative flex-[0_0_auto] bg-white rounded-[31px]">
+                <button className="inline-flex items-center justify-center gap-[10px] px-[20px] py-[12px] relative flex-[0_0_auto] bg-white rounded-[31px]" onClick={handleFinish}>
                     <div className="relative w-fit mt-[-1.00px] [font-family:'BT_Beau_Sans-Regular',Helvetica] font-normal text-black text-[16px] tracking-[0] leading-[normal]">
                         Done
                     </div>
-                </div>
+                </button>
             </div>
         </div>
     )

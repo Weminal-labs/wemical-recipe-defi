@@ -26,41 +26,15 @@ export enum ActionType {
 
 }
 
-const ITEMS = [
-    {
-        id: 1,
-        type: ActionType.SwapAftermath,
-        component: <SwapAftermath isSuiToUsdc={true} amount={10} />
-    },
-    {
-        id: 2,
-        type: ActionType.DepositDeepBook,
-        component: <DepositDeepBook />
-    },
-    {
-        id: 3,
-        type: ActionType.SwapDeepBook,
-        component: <SwapDeepBook />
-    },
-    {
-        id: 4,
-        type: ActionType.SwapDeepBook,
-        component: <WithdrawBase />
-    },
-]
+
 
 interface ContainerProps {
     setSelectedAction: React.Dispatch<React.SetStateAction<number>>
-    actionsArgs: any[]
+    actions: any[]
+    setActions: React.Dispatch<React.SetStateAction<any[]>>
 }
 
-export const Container = memo(function Container({ setSelectedAction, actionsArgs }: ContainerProps) {
-    const [actions, setActions] = useState(ITEMS)
-
-    useEffect(() => {
-
-    }, [actionsArgs])
-
+export const Container = memo(function Container({ setSelectedAction, actions, setActions }: ContainerProps) {
     const selectAction = useCallback(
         (id: string) => {
             setSelectedAction(Number(id))
@@ -103,7 +77,8 @@ export const Container = memo(function Container({ setSelectedAction, actionsArg
         <div ref={drop} style={style}>
             {actions.map((action) => (
                 <Action
-                    component={action.component}
+                    args={action.args}
+                    type={action.type}
                     key={action.id}
                     id={`${action.id}`}
                     moveAction={moveAction}

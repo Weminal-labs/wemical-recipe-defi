@@ -5,10 +5,10 @@ import "react-toggle/style.css";
 
 interface SwapAftermathFormProps {
     handleDone: () => void
-    handleActionArgs: (id: any, args: any) => void
+    handleArgsForEachAction: (id: any, args: any) => void
 }
 
-export const SwapAftermathForm = ({ handleDone, handleActionArgs }: SwapAftermathFormProps) => {
+export const SwapAftermathForm = ({ handleDone, handleArgsForEachAction }: SwapAftermathFormProps) => {
     const [amount, setAmount] = React.useState(0)
     const [isSuiToUsdc, setIsSuiToUsdc] = React.useState(true)
     const [spotPrice, setSpotPrice] = React.useState(0)
@@ -32,7 +32,7 @@ export const SwapAftermathForm = ({ handleDone, handleActionArgs }: SwapAftermat
 
     const handleFinish = () => {
         handleDone()
-        handleActionArgs(1, { amount: amount * 1_000_000_000, isSuiToUsdc })
+        handleArgsForEachAction(1, { amount: amount, isSuiToUsdc })
     }
 
     return (
