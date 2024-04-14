@@ -12,6 +12,7 @@ import { ConnectButton } from "@mysten/dapp-kit";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Actions from '../../recipe_action/index'
+import { Swap } from "../../Swap";
 
 export const RecipeManagement = (): JSX.Element => {
   return (
@@ -55,7 +56,7 @@ export const RecipeManagement = (): JSX.Element => {
                 </p>
               </div>
             </div>
-            <div className="absolute top-[350px] left-[406px] w-full h-screen overflow-y-scroll">
+            <div className="absolute top-[350px] left-[406px] w-[1150px] h-screen">
               <DndProvider backend={HTML5Backend}>
                 <Actions />
               </DndProvider>
@@ -106,7 +107,8 @@ export const RecipeManagement = (): JSX.Element => {
             </div>
           </div>
           <div className="absolute w-[653px] h-[748px] top-[347px] left-[1371px]">
-            <div className="flex flex-wrap w-[482px] items-start gap-[117px_24px] p-[40px] absolute top-0 left-0 bg-[#2828284c] rounded-[20px] overflow-hidden border border-solid border-[#ffffff1a]">
+            <Swap />
+            {/* <div className="flex flex-wrap w-[482px] items-start gap-[117px_24px] p-[40px] absolute top-0 left-0 bg-[#2828284c] rounded-[20px] overflow-hidden border border-solid border-[#ffffff1a]">
               <div className="relative w-[246.09px] mt-[-1.00px] [font-family:'BT_Beau_Sans-Regular',Helvetica] font-normal text-white text-[32px] tracking-[0] leading-[38.4px]">
                 Create a pool
               </div>
@@ -162,7 +164,7 @@ export const RecipeManagement = (): JSX.Element => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="inline-flex items-center justify-center gap-[10px] px-[20px] py-[12px] absolute top-[46px] left-[1487px] bg-white rounded-[31px]">
             <div className="relative w-fit mt-[-1.00px] [font-family:'BT_Beau_Sans-Regular',Helvetica] font-normal text-black text-[16px] tracking-[0] leading-[normal]">

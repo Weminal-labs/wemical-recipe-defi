@@ -7,9 +7,13 @@ import { Action } from './Action'
 import { ItemTypes } from './ItemTypes'
 import { Swap } from '../Swap'
 import { Deposit } from '../Deposit'
+import { SwapAftermath } from './aftermath/SwapAftermath'
+import { DepositDeepBook } from './deepbook/DepositDeepBook'
+import { SwapDeepBook } from './deepbook/SwapDeepBook'
+import { WithdrawBase } from './deepbook/WithdrawBase'
 
 const style = {
-
+    width: "580px"
 }
 
 export interface ContainerState {
@@ -19,15 +23,19 @@ export interface ContainerState {
 const ITEMS = [
     {
         id: 1,
-        component: <Swap />
+        component: <SwapAftermath />
     },
     {
         id: 2,
-        component: <Deposit />
+        component: <DepositDeepBook />
     },
     {
         id: 3,
-        component: <Deposit />
+        component: <SwapDeepBook />
+    },
+    {
+        id: 4,
+        component: <WithdrawBase />
     },
 ]
 

@@ -5,7 +5,7 @@ import { useDrag, useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes'
 
 const style: CSSProperties = {
-
+    border: '1px dashed gray',
 }
 
 export interface ActionProps {
