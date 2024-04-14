@@ -1,5 +1,5 @@
 import { SuiClient, SuiHTTPTransport, getFullnodeUrl } from "@mysten/sui.js/client";
-import { Aftermath, AftermathApi, IndexerCaller, Pools, Router, Staking } from "aftermath-ts-sdk";
+import { Aftermath, AftermathApi, IndexerCaller, Pool, Pools, Router, Staking } from "aftermath-ts-sdk";
 
 const testnetStakingAddresses = {
     staking: {
@@ -42,12 +42,16 @@ const stakingApi = afApi.Staking();
 let staking: Staking | null = null;
 let pools: Pools | null = null;
 let router: Router | null = null;
+let pool: Pool | null = null;
 
 async function init() {
     await afSdk.init();
     staking = afSdk.Staking();
     pools = afSdk.Pools();
     router = afSdk.Router();
+    pool = await pools.getPool({
+        objectId: "0x5eb0f58b9cb9b7b843a50e1b94da98e57b534bae7f93efb35afe868c24898dc5", // SUI/USDC
+    });
 }
 
 export const createTxbSwap = async (amount: bigint) => {
@@ -103,6 +107,8 @@ export const createTxbSwapOposite = async (amount: bigint) => {
 };
 
 export const createTxbStake = async () => {
+    await init();
+
     const tx = await staking?.getStakeTransaction({
         walletAddress:
             "0xb4b291607e91da4654cab88e5e35ba2921ef68f1b43725ef2faeae045bf5915d",
@@ -128,3 +134,31 @@ export const createTxbStake = async () => {
 
     return tx;
 }
+
+export const getSpotPrice = async () => {
+    await init();
+
+    const spotPrice = pool?.getSpotPrice({
+        coinInType:
+            "0x02264251ff808fbf55c06f60fd1174814fd787bd32dc539531894deb497029c7::usdc::USDC",
+        coinOutType:
+            "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+        // optional
+        withFees: true,
+    });
+    return spotPrice;
+};
+
+export const getSpotPriceOposite = async () => {
+    await init();
+
+    const spotPrice = pool?.getSpotPrice({
+        coinOutType:
+            "0x02264251ff808fbf55c06f60fd1174814fd787bd32dc539531894deb497029c7::usdc::USDC",
+        coinInType:
+            "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI",
+        // optional
+        withFees: true,
+    });
+    return spotPrice;
+};

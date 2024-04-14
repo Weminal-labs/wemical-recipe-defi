@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SearchIcon } from "../../icons/SearchIcon";
 import { DashboardIcon } from "../../icons/DashboardIcon";
 import { BoxIcon } from "../../icons/BoxIcon";
@@ -8,7 +8,7 @@ import { SwapIcon } from "../../icons/SwapIcon";
 import { AddElementIcon } from "../../icons/AddElementIcon";
 import { BarcodeIcon } from "../../icons/BarcodeIcon";
 import { ExchangeIcon } from "../../icons/ExchangeIcon";
-import { ConnectButton } from "@mysten/dapp-kit";
+import { ConnectButton, useCurrentAccount, useSignAndExecuteTransactionBlock } from "@mysten/dapp-kit";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Actions from '../../recipe_action/index'
@@ -17,14 +17,120 @@ import { SwapAftermath } from "../../recipe_action/aftermath/SwapAftermath";
 import { DepositDeepBook } from "../../recipe_action/deepbook/DepositDeepBook";
 import { SwapDeepBook } from "../../recipe_action/deepbook/SwapDeepBook";
 import { WithdrawBase } from "../../recipe_action/deepbook/WithdrawBase";
+import { createTxbSwap, getSpotPrice, getSpotPriceOposite } from "../../api/aftermath";
+import { TransactionBlock } from "@mysten/sui.js/transactions";
+import { SwapAftermathForm } from "../../recipe_action/aftermath/SwapAftermathForm";
+import { ActionType } from "../../recipe_action/Container";
+import { useNetworkVariables } from "../../networkConfig";
 
 export const RecipeManagement = (): JSX.Element => {
+  const currentAccount = useCurrentAccount();
+  const { mutate: signAndExecute } = useSignAndExecuteTransactionBlock();
+  const { deepbookPackageId } = useNetworkVariables();
+
   const [selectedAction, setSelectedAction] = useState<number>(0);
+  const [actionsArgs, setActionsArgs] = useState<any[]>([
+    {
+      order: 1,
+      id: 1, // Aftermath swap
+      type: ActionType.SwapAftermath,
+      args: {
+        isSuiToUsdc: true,
+        amount: BigInt(1_423_837_387),
+      }
+    },
+    {
+      order: 2,
+      id: 2, // Deep book deposit
+      type: ActionType.DepositDeepBook,
+      args: {
+
+      }
+    },
+    {
+      order: 3,
+      type: ActionType.SwapDeepBook,
+      id: 3, // Deep book swap
+      args: {
+
+      }
+    },
+    {
+      order: 4,
+      type: ActionType.WithdrawBase,
+      id: 4, // Deep book withdraw
+      args: {
+
+      }
+    }
+  ]);
+
+  const handleActionArgs = (id: any, args: any) => {
+    const newActionsArgs = actionsArgs.map((action) => {
+      if (action.id === id) {
+        return {
+          ...action,
+          args
+        }
+      }
+      return action;
+    })
+    setActionsArgs(newActionsArgs);
+  }
+
+  const handleExecute = async () => {
+    // for (let i = 0; i < actionsArgs.length; i++) {
+    //   const action = actionsArgs[i];
+    //   switch (action.id) {
+    //     case 1:
+    //       const { coinInType, coinOutType, amount } = action.args;
+    //       const txb = new TransactionBlock();
+    //       txb.moveCall({
+    //         arguments: [txb.pure.u64(amount), txb.object(coinInType), txb.object(coinOutType)],
+    //         target: ""
+    //       });
+    //   }
+    // }
+
+    const txb = await createTxbSwap(BigInt(1_000_000_000));
+
+    txb?.moveCall({
+      arguments: [],
+      target: `${deepbookPackageId}::book::new_custodian_account`,
+    });
+
+    signAndExecute(
+      {
+        transactionBlock: txb!,
+        options: {
+          showEffects: true,
+          showObjectChanges: true,
+        },
+      },
+      {
+        onSuccess: (tx) => {
+          console.log(tx)
+        },
+      },
+    );
+
+  }
+
+
+  useEffect(() => {
+    getSpotPrice();
+    console.log("Br")
+    getSpotPriceOposite();
+  }, [])
+
+  const handleDone = () => {
+    setSelectedAction(0);
+  }
 
   const renderFormForEachAction = () => {
     switch (selectedAction) {
       case 1:
-        return <SwapAftermath />;
+        return <SwapAftermathForm handleDone={handleDone} handleActionArgs={handleActionArgs} />;
       case 2:
         return <DepositDeepBook />
       case 3:
@@ -79,8 +185,9 @@ export const RecipeManagement = (): JSX.Element => {
             </div>
             <div className="absolute top-[350px] left-[406px] w-[1150px] h-screen">
               <DndProvider backend={HTML5Backend}>
-                <Actions setSelectedAction={setSelectedAction} />
+                <Actions setSelectedAction={setSelectedAction} actionsArgs={actionsArgs} />
               </DndProvider>
+              <button onClick={handleExecute}>Execute</button>
             </div>
             <div className="absolute top-[34px] left-[406px] [font-family:'Specify_PERSONAL_Expanded-BoldItalic',Helvetica] font-bold italic text-white text-[24px] tracking-[0.48px] leading-[70px] whitespace-nowrap">
               wemical

@@ -1,6 +1,6 @@
 import update from 'immutability-helper'
 import type { FC, ReactElement } from 'react'
-import React, { memo, useCallback, useState } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import { useDrop } from 'react-dnd'
 
 import { Action } from './Action'
@@ -20,31 +20,48 @@ export interface ContainerState {
     actions: any[]
 }
 
+export enum ActionType {
+    SwapAftermath = 1,
+    DepositDeepBook = 2,
+    SwapDeepBook = 3,
+    WithdrawBase = 4
+
+}
+
 const ITEMS = [
     {
         id: 1,
-        component: <SwapAftermath />
+        type: ActionType.SwapAftermath,
+        component: <SwapAftermath isSuiToUsdc={true} amount={10} />
     },
     {
         id: 2,
+        type: ActionType.DepositDeepBook,
         component: <DepositDeepBook />
     },
     {
         id: 3,
+        type: ActionType.SwapDeepBook,
         component: <SwapDeepBook />
     },
     {
         id: 4,
+        type: ActionType.SwapDeepBook,
         component: <WithdrawBase />
     },
 ]
 
 interface ContainerProps {
     setSelectedAction: React.Dispatch<React.SetStateAction<number>>
+    actionsArgs: any[]
 }
 
-export const Container = memo(function Container({ setSelectedAction }: ContainerProps) {
+export const Container = memo(function Container({ setSelectedAction, actionsArgs }: ContainerProps) {
     const [actions, setActions] = useState(ITEMS)
+
+    useEffect(() => {
+
+    }, [actionsArgs])
 
     const selectAction = useCallback(
         (id: string) => {
@@ -57,6 +74,7 @@ export const Container = memo(function Container({ setSelectedAction }: Containe
         (id: string) => {
             const action = actions.filter((a) => `${a.id}` === id)[0] as {
                 id: number
+                type: ActionType
                 component: ReactElement
             }
             return {
