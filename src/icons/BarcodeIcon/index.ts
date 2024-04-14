@@ -1,0 +1,1 @@
+export { BarcodeIcon } from "./VuesaxLinearBarcode";

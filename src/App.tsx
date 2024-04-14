@@ -8,7 +8,7 @@ import { Counter } from "./Counter";
 import { CreateCounter } from "./CreateCounter";
 import { DeepBook } from "./DeepBook";
 import AfterMathComponent from "./Aftermath";
-import Example from './recipe_action'
+import Actions from './recipe_action'
 
 function App() {
   const currentAccount = useCurrentAccount();
@@ -67,7 +67,7 @@ function App() {
       <br />
 
       <DndProvider backend={HTML5Backend}>
-        <Example />
+        <Actions />
       </DndProvider>
     </>
   );
