@@ -1,11 +1,11 @@
 import React from 'react'
 
-export const Swap = () => {
+export const DepositDeepBookForm = () => {
     return (
         <div className="flex flex-col items-start gap-[24px] p-[40px] relative bg-[#2828284c] border border-solid border-[#ffffff1a] w-[482px] mb-5">
             <div className="flex items-start justify-between relative self-stretch w-full flex-[0_0_auto]">
                 <div className="relative flex-1 mt-[-1.00px] [font-family:'BT_Beau_Sans-Regular',Helvetica] font-normal text-[32px] tracking-[0] leading-[38.4px]">
-                    Swap
+                    Deposit base coin
                 </div>
             </div>
             <div className="flex flex-col h-[48px] items-end justify-around gap-[16px] relative self-stretch w-full">
@@ -19,12 +19,12 @@ export const Swap = () => {
                             <div className="ml-[-13px] bg-[#828282] relative w-[26px] h-[26px] rounded-[13px]" />
                         </div>
                         <div className="relative w-fit mt-[-4.00px] mb-[-2.00px] font-subtitle font-[number:var(--subtitle-font-weight)] text-[#ededed] text-[length:var(--subtitle-font-size)] tracking-[var(--subtitle-letter-spacing)] leading-[var(--subtitle-line-height)] whitespace-nowrap [font-style:var(--subtitle-font-style)]">
-                            SUI/USDC
+                            SUI/TDTC
                         </div>
                     </div>
                 </div>
             </div>
-            {/* <div className="inline-flex flex-col items-start gap-[8px] relative flex-[0_0_auto]">
+            <div className="inline-flex flex-col items-start gap-[8px] relative flex-[0_0_auto]">
                 <div className="relative w-[310px] h-[24px] mt-[-1.00px] font-subtitle font-[number:var(--subtitle-font-weight)] text-[#8d8b8c] text-[length:var(--subtitle-font-size)] tracking-[var(--subtitle-letter-spacing)] leading-[var(--subtitle-line-height)] whitespace-nowrap [font-style:var(--subtitle-font-style)]">
                     From
                 </div>
@@ -36,8 +36,8 @@ export const Swap = () => {
                         Balance: 0 SUI
                     </div>
                 </div>
-            </div> */}
-            {/* <div className="inline-flex flex-col items-start gap-[8px] relative flex-[0_0_auto]">
+            </div>
+            <div className="inline-flex flex-col items-start gap-[8px] relative flex-[0_0_auto]">
                 <div className="relative w-[310px] h-[24px] mt-[-1.00px] font-subtitle font-[number:var(--subtitle-font-weight)] text-[#8d8b8c] text-[length:var(--subtitle-font-size)] tracking-[var(--subtitle-letter-spacing)] leading-[var(--subtitle-line-height)] whitespace-nowrap [font-style:var(--subtitle-font-style)]">
                     To
                 </div>
@@ -49,7 +49,7 @@ export const Swap = () => {
                         Receive: 0 SUI
                     </div>
                 </div>
-            </div> */}
+            </div>
             <div className="inline-flex flex-col items-start gap-[8px] relative flex-[0_0_auto]">
                 <div className="relative w-[310px] h-[24px] mt-[-1.00px] font-subtitle font-[number:var(--subtitle-font-weight)] text-[#8d8b8c] text-[length:var(--subtitle-font-size)] tracking-[var(--subtitle-letter-spacing)] leading-[var(--subtitle-line-height)] whitespace-nowrap [font-style:var(--subtitle-font-style)]">
                     Amount

@@ -12,16 +12,18 @@ import { ConnectButton, useCurrentAccount, useSignAndExecuteTransactionBlock } f
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Actions from '../../recipe_action/index'
-import { Swap } from "../../Swap";
-import { SwapAftermath } from "../../recipe_action/aftermath/SwapAftermath";
+import { SwapAftermath } from "../../recipe_action/aftermath/swap/SwapAftermath";
 import { DepositDeepBook } from "../../recipe_action/deepbook/deposit/DepositDeepBook";
-import { SwapDeepBook } from "../../recipe_action/deepbook/SwapDeepBook";
-import { WithdrawBase } from "../../recipe_action/deepbook/WithdrawBase";
+import { SwapDeepBook } from "../../recipe_action/deepbook/swap/SwapDeepBook";
+import { WithdrawBase } from "../../recipe_action/deepbook/withdraw/WithdrawBase";
 import { createTxbSwap, getSpotPrice, getSpotPriceOposite } from "../../api/aftermath";
 import { TransactionBlock } from "@mysten/sui.js/transactions";
-import { SwapAftermathForm } from "../../recipe_action/aftermath/SwapAftermathForm";
+import { SwapAftermathForm } from "../../recipe_action/aftermath/swap/SwapAftermathForm";
 import { ActionType } from "../../recipe_action/Container";
 import { useNetworkVariables } from "../../networkConfig";
+import { DepositDeepBookForm } from "../../recipe_action/deepbook/deposit/DepositDeepBookForm";
+import { SwapDeepBookForm } from "../../recipe_action/deepbook/swap/SwapDeepBookForm";
+import { WithdrawBaseForm } from "../../recipe_action/deepbook/withdraw/WithdrawBaseForm";
 
 export const RecipeManagement = (): JSX.Element => {
   const currentAccount = useCurrentAccount();
@@ -132,11 +134,11 @@ export const RecipeManagement = (): JSX.Element => {
       case 1:
         return <SwapAftermathForm handleDone={handleDone} handleActionArgs={handleActionArgs} />;
       case 2:
-        return <DepositDeepBook />
+        return <DepositDeepBookForm />
       case 3:
-        return <SwapDeepBook />
+        return <SwapDeepBookForm />
       case 4:
-        return <WithdrawBase />
+        return <WithdrawBaseForm />
       default:
         return null;
     }

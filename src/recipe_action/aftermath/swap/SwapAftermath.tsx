@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { getSpotPrice, getSpotPriceOposite } from '../../api/aftermath'
-import { ArrowDown } from '../../icons/ArrowDown'
-import { ArrowRight } from '../../icons/ArrowRight'
+import { getSpotPrice, getSpotPriceOposite } from '../../../api/aftermath'
+import { ArrowDown } from '../../../icons/ArrowDown'
+import { ArrowRight } from '../../../icons/ArrowRight'
 
 interface SwapAftermathProps {
     amount: number

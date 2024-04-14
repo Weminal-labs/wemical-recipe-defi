@@ -7,10 +7,10 @@ import { Action } from './Action'
 import { ItemTypes } from './ItemTypes'
 import { Swap } from '../Swap'
 import { Deposit } from '../Deposit'
-import { SwapAftermath } from './aftermath/SwapAftermath'
+import { SwapAftermath } from './aftermath/swap/SwapAftermath'
 import { DepositDeepBook } from './deepbook/deposit/DepositDeepBook'
-import { SwapDeepBook } from './deepbook/SwapDeepBook'
-import { WithdrawBase } from './deepbook/WithdrawBase'
+import { SwapDeepBook } from './deepbook/swap/SwapDeepBook'
+import { WithdrawBase } from './deepbook/withdraw/WithdrawBase'
 
 const style = {
     width: "580px"

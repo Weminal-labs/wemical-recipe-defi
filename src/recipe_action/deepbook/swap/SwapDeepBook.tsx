@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrowRight } from '../../icons/ArrowRight'
+import { ArrowRight } from '../../../icons/ArrowRight'
 
 export const SwapDeepBook = () => {
     return (
