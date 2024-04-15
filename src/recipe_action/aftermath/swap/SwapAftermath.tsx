@@ -26,7 +26,9 @@ export const SwapAftermath = ({ amount, isSuiToUsdc }: SwapAftermathProps) => {
     return (
         <>
             <div className="flex w-[577px] h-[60px] items-center gap-[60px] bg-[#6060604c] rounded-[12px] overflow-hidden border border-solid border-[#ffffff1a] mb-2">
-                <div className="inline-flex flex-col items-center justify-center px-[40px] py-[16px] relative self-stretch flex-[0_0_auto] bg-white">
+                <div className="inline-flex flex-col items-center justify-center px-[40px] py-[16px] relative self-stretch flex-[0_0_auto]" style={{
+                    backgroundColor: "#f5bdbe"
+                }}>
                     <div className="relative w-fit [font-family:'BT_Beau_Sans-Medium',Helvetica] font-medium text-black text-[18px] tracking-[-0.36px] leading-[21.6px] whitespace-nowrap">
                         Swap
                     </div>

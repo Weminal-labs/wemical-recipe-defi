@@ -81,9 +81,34 @@ export const RecipeManagement = (): JSX.Element => {
 
   const [selectedAction, setSelectedAction] = useState<number>(0);
   const [actions, setActions] = useState(ACTIONS);
-  const [custodianAccount, setCustodianAccount] = useState<string>(
-    "0x43860e9fb7d0682e3d787e60144139d53054eb45f655def76874044975503656",
-  );
+  const [custodianAccount, setCustodianAccount] = useState<string>("");
+
+  const handleCreateCustodianAccount = () => {
+    const txb = new TransactionBlock();
+    txb?.moveCall({
+      arguments: [],
+      target: `${deepbookPackageId}::book::new_custodian_account`,
+    });
+
+    signAndExecute(
+      {
+        transactionBlock: txb!,
+        options: {
+          showEffects: true,
+          showObjectChanges: true,
+        },
+      },
+      {
+        onSuccess: (tx) => {
+          console.log(tx);
+          setCustodianAccount((tx?.objectChanges?.[1] as any).objectId);
+        },
+        onError: (error) => {
+          console.log(error);
+        },
+      },
+    );
+  };
 
   const handleArgsForEachAction = (id: number, args: any) => {
     setActions(
@@ -307,17 +332,46 @@ export const RecipeManagement = (): JSX.Element => {
           />
         </DndProvider>
         <button
-          className="w-[577px] mt-3 rounded-[31px] py-3"
+          className="w-[577px] my-4 rounded-[31px] py-3"
           onClick={handleExecute}
         >
           Execute
         </button>
+        {custodianAccount ? (
+          <></>
+        ) : (
+          <button
+            className="block w-[577px] py-3 rounded-[13px]"
+            style={{
+              backgroundColor: "blueviolet",
+            }}
+            onClick={handleCreateCustodianAccount}
+          >
+            Create Custodian Account
+          </button>
+        )}
       </div>
-      <div className="inline-flex items-end gap-[466px] absolute top-[155px] left-[406px]">
-        <div className="inline-flex items-center justify-center gap-[10px] px-[20px] py-[12px] relative flex-[0_0_auto] bg-white rounded-[31px]">
-          <div className="relative w-fit mt-[-1.00px] [font-family:'BT_Beau_Sans-Regular',Helvetica] font-normal text-black text-[16px] tracking-[0] leading-[normal]">
-            Deep book
-          </div>
+      <div className="inline-flex items-end gap-[140px] absolute top-[155px] left-[406px]">
+        <div className="flex items-center justify-between w-[420px]">
+          <img
+            src="https://blog.sui.io/content/images/size/w1200/2023/05/BlogHeader-Deepbook.jpg"
+            className="h-[30px]"
+            alt=""
+          />
+
+          <img src="/img/aftermath.png" alt="" className="h-[30px] ml-4" />
+
+          <img
+            src="https://www.cetus.zone/_nuxt/img/img-logo@2x.89d6434.png"
+            className="h-[30px] ml-4"
+            alt=""
+          />
+
+          <img
+            src="https://turbos.finance/image/logo.2d97feb4.png"
+            className="h-[30px] ml-4"
+            alt=""
+          />
         </div>
         <div className="inline-flex items-start gap-[16px] relative flex-[0_0_auto]">
           <div className="inline-flex h-[40px] items-center justify-center gap-[8px] px-[16px] py-0 relative flex-[0_0_auto] rounded-[8px] border border-solid border-white">
