@@ -354,7 +354,7 @@ export const RecipeManagement = (): JSX.Element => {
       <div className="inline-flex items-end gap-[140px] absolute top-[155px] left-[406px]">
         <div className="flex items-center justify-between w-[420px]">
           <img
-            src="https://blog.sui.io/content/images/size/w1200/2023/05/BlogHeader-Deepbook.jpg"
+            src="/img/deepbook.png"
             className="h-[30px]"
             alt=""
           />
