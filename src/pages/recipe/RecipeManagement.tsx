@@ -83,42 +83,92 @@ export const RecipeManagement = (): JSX.Element => {
 
 
   const handleExecute = async () => {
-    // for (let i = 0; i < actionsArgs.length; i++) {
-    //   const action = actionsArgs[i];
-    //   switch (action.id) {
-    //     case 1:
-    //       const { coinInType, coinOutType, amount } = action.args;
-    //       const txb = new TransactionBlock();
-    //       txb.moveCall({
-    //         arguments: [txb.pure.u64(amount), txb.object(coinInType), txb.object(coinOutType)],
-    //         target: ""
-    //       });
-    //   }
-    // }
+    let txb = new TransactionBlock();
 
-    const txb = await createTxbSwap(BigInt(1_000_000_000));
-
-    txb?.moveCall({
-      arguments: [],
-      target: `${deepbookPackageId}::book::new_custodian_account`,
-    });
-
-    signAndExecute(
-      {
-        transactionBlock: txb!,
-        options: {
-          showEffects: true,
-          showObjectChanges: true,
-        },
-      },
-      {
-        onSuccess: (tx) => {
-          console.log(tx)
-        },
-      },
-    );
-
+    for (let i = 0; i < actions.length; i++) {
+      const action = actions[i];
+      if (action.type === ActionType.SwapAftermath) {
+        // txb = (await createTxbSwap(BigInt(1_000_000_000)))!
+        signAndExecute(
+          {
+            transactionBlock: (await createTxbSwap(BigInt(1_000_000_000)))!,
+            options: {
+              showEffects: true,
+              showObjectChanges: true,
+            },
+          },
+          {
+            onSuccess: (tx) => {
+              console.log(tx)
+              signAndExecute(
+                {
+                  transactionBlock: txb!,
+                  options: {
+                    showEffects: true,
+                    showObjectChanges: true,
+                  },
+                },
+                {
+                  onSuccess: (tx) => {
+                    console.log(tx)
+                  },
+                  onError: (error) => {
+                    console.log(error)
+                  }
+                },
+              );
+            },
+            onError: (error) => {
+              console.log(error)
+            }
+          },
+        );
+      } else if (action.type === ActionType.DepositDeepBook) {
+        txb?.moveCall({
+          arguments: [],
+          target: `0xcab68c8cd7e80f3dd06466da6b2c083d1fd50ab3e9be8e32395c19b53021c064::counter::create`,
+        });
+      } else if (action.type === ActionType.SwapDeepBook) {
+        txb?.moveCall({
+          arguments: [],
+          target: `${deepbookPackageId}::book::new_custodian_account`,
+        });
+      }
+      else if (action.type === ActionType.WithdrawBase) {
+        txb?.moveCall({
+          arguments: [],
+          target: `${deepbookPackageId}::book::new_custodian_account`,
+        });
+      }
+    }
   }
+
+  // const handleExecute = async () => {
+  //   const txb = await createTxbSwap(BigInt(1_000_000_000))
+
+  //   txb?.moveCall({
+  //     arguments: [],
+  //     target: `${deepbookPackageId}::book::new_custodian_account`,
+  //   });
+
+  //   signAndExecute(
+  //     {
+  //       transactionBlock: txb!,
+  //       options: {
+  //         showEffects: true,
+  //         showObjectChanges: true,
+  //       },
+  //     },
+  //     {
+  //       onSuccess: (tx) => {
+  //         console.log(tx)
+  //       },
+  //       onError: (error) => {
+  //         console.log(error)
+  //       }
+  //     },
+  //   );
+  // }
 
 
   useEffect(() => {

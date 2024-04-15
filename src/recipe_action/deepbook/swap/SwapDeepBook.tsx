@@ -19,7 +19,7 @@ export const SwapDeepBook = ({ amount }: SwapDeepBookProps) => {
                 </div>
                 <ArrowRight className="!absolute !w-[24px] !h-[24px] !top-0 !left-[75px]" />
                 <div className="absolute -top-px left-[123px] [font-family:'BT_Beau_Sans-Medium',Helvetica] font-medium text-white text-[18px] tracking-[-0.36px] leading-[21.6px] whitespace-nowrap">
-                    TDTC
+                    WTBC
                 </div>
             </div>
         </div>

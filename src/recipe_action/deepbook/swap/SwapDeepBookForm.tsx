@@ -28,7 +28,7 @@ export const SwapDeepBookForm = ({ handleDone, handleArgsForEachAction }: Action
                             <div className="ml-[-13px] bg-[#828282] relative w-[26px] h-[26px] rounded-[13px]" />
                         </div>
                         <div className="relative w-fit mt-[-4.00px] mb-[-2.00px] font-subtitle font-[number:var(--subtitle-font-weight)] text-[#ededed] text-[length:var(--subtitle-font-size)] tracking-[var(--subtitle-letter-spacing)] leading-[var(--subtitle-line-height)] whitespace-nowrap [font-style:var(--subtitle-font-style)]">
-                            SUI/TDTC
+                            SUI/WTBC
                         </div>
                     </div>
                 </div>
