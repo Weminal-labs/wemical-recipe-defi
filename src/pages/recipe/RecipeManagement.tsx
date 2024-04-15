@@ -16,7 +16,7 @@ import { SwapAftermath } from "../../recipe_action/aftermath/swap/SwapAftermath"
 import { DepositDeepBook } from "../../recipe_action/deepbook/deposit/DepositDeepBook";
 import { SwapDeepBook } from "../../recipe_action/deepbook/swap/SwapDeepBook";
 import { WithdrawBase } from "../../recipe_action/deepbook/withdraw/WithdrawBase";
-import { createTxbSwap, getSpotPrice, getSpotPriceOposite } from "../../api/aftermath";
+import { createTxbSwap, createTxbSwapOposite, getSpotPrice, getSpotPriceOposite } from "../../api/aftermath";
 import { TransactionBlock } from "@mysten/sui.js/transactions";
 import { SwapAftermathForm } from "../../recipe_action/aftermath/swap/SwapAftermathForm";
 import { ActionType } from "../../recipe_action/Container";
@@ -90,9 +90,16 @@ export const RecipeManagement = (): JSX.Element => {
     for (let i = 0; i < actions.length; i++) {
       const action = actions[i];
       if (action.type === ActionType.SwapAftermath) {
+        let swapTxb = new TransactionBlock();
+        if (action.args.isSuiToUsdc) {
+          swapTxb = (await createTxbSwap(BigInt(action.args.amount * 1_000_000_000)))!
+        } else {
+          swapTxb = (await createTxbSwapOposite(BigInt(action.args.amount * 1_000_000_000)))!
+        }
+        
         signAndExecute(
           {
-            transactionBlock: (await createTxbSwap(BigInt(action.args.amount * 1_000_000_000)))!,
+            transactionBlock: swapTxb,
             options: {
               showEffects: true,
               showObjectChanges: true,
