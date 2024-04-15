@@ -13,6 +13,14 @@ export const Home = () => {
             <div className="[font-family:'Specify_PERSONAL_Expanded-BoldItalic',Helvetica] font-bold italic text-white text-[24px] tracking-[0.48px] leading-[70px] whitespace-nowrap ml-[21%] mt-6">
               wemical
             </div>
+            <Link
+              className="ml-5 w-full no-underline z-10"
+              to="/explore/recipe"
+            >
+              <div className="[font-family:'Specify_PERSONAL_Expanded-BoldItalic',Helvetica] font-bold italic text-white text-[24px] tracking-[0.48px] leading-[70px] whitespace-nowrap  mt-6">
+                Explore
+              </div>
+            </Link>
             <div className="gap-[10px] px-[20px] py-[12px] bg-white rounded-[31px] mr-[15%] mt-6 z-10">
               <ConnectButton />
             </div>
