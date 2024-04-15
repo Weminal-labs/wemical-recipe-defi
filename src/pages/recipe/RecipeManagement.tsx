@@ -82,6 +82,7 @@ export const RecipeManagement = (): JSX.Element => {
   const [selectedAction, setSelectedAction] = useState<number>(0);
   const [actions, setActions] = useState(ACTIONS);
   const [custodianAccount, setCustodianAccount] = useState<string>("");
+  const [response, setResponse] = useState<any[]>([]);
 
   const handleCreateCustodianAccount = () => {
     const txb = new TransactionBlock();
@@ -161,6 +162,11 @@ export const RecipeManagement = (): JSX.Element => {
             onSuccess: (tx) => {
               console.log(tx);
 
+              setResponse((prev) => [
+                ...prev,
+                `https://suiscan.xyz/testnet/tx/${tx.digest}`,
+              ]);
+
               txb.setGasBudget(10_000_000_000n);
 
               signAndExecute(
@@ -172,8 +178,12 @@ export const RecipeManagement = (): JSX.Element => {
                   },
                 },
                 {
-                  onSuccess: (tx) => {
-                    console.log(tx);
+                  onSuccess: (tx2) => {
+                    console.log(tx2);
+                    setResponse((prev) => [
+                      ...prev,
+                      `https://suiscan.xyz/testnet/tx/${tx2.digest}`,
+                    ]);
                   },
                   onError: (error) => {
                     console.log(error);
@@ -339,6 +349,18 @@ export const RecipeManagement = (): JSX.Element => {
         >
           Execute
         </button>
+
+        {response && (
+          <div>
+            {response.map((link, index) => {
+              return (
+                <div>
+                  <a href={link}>Transaction {index + 1}</a>
+                </div>
+              );
+            })}
+          </div>
+        )}
         {custodianAccount ? (
           <></>
         ) : (
