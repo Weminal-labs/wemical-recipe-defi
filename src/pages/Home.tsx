@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowRight } from "../icons/ArrowRight";
 import Spline from "@splinetool/react-spline";
 import { ConnectButton } from "@mysten/dapp-kit";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   return (
@@ -29,12 +30,14 @@ export const Home = () => {
             <p className="[font-family:'BT_Beau_Sans-Light',Helvetica] font-light text-[#cfcfcf] text-[18px] tracking-[0.36px] leading-[70px] whitespace-nowrap">
               Let's create some cooking recipe with wemical
             </p>
-            <div className="inline-flex items-center gap-[13px]">
-              <div className="relative w-fit mt-[-1.00px] [font-family:'BT_Beau_Sans-Medium',Helvetica] font-medium text-white text-[18px] tracking-[0.36px] leading-[70px] whitespace-nowrap">
-                CLICK TO EXPLORE
+            <Link className="w-full no-underline z-10" to="/explore/recipe">
+              <div className="inline-flex items-center gap-[13px]">
+                <div className="relative w-fit mt-[-1.00px] [font-family:'BT_Beau_Sans-Medium',Helvetica] font-medium text-white text-[18px] tracking-[0.36px] leading-[70px] whitespace-nowrap">
+                  CLICK TO EXPLORE
+                </div>
+                <ArrowRight className="!relative !w-[24px] !h-[24px]" />
               </div>
-              <ArrowRight className="!relative !w-[24px] !h-[24px]" />
-            </div>
+            </Link>
           </div>
           <img
             className="absolute w-full h-[1080px] top-0 left-0"
