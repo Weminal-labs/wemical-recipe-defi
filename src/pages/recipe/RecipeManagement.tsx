@@ -306,7 +306,12 @@ export const RecipeManagement = (): JSX.Element => {
             setActions={setActions}
           />
         </DndProvider>
-        <button onClick={handleExecute}>Execute</button>
+        <button
+          className="w-[577px] mt-3 rounded-[31px] py-3"
+          onClick={handleExecute}
+        >
+          Execute
+        </button>
       </div>
       <div className="inline-flex items-end gap-[466px] absolute top-[155px] left-[406px]">
         <div className="inline-flex items-center justify-center gap-[10px] px-[20px] py-[12px] relative flex-[0_0_auto] bg-white rounded-[31px]">
