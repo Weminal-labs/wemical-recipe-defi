@@ -140,10 +140,12 @@ export const RecipeManagement = (): JSX.Element => {
         if (action.args.isSuiToUsdc) {
           swapTxb = (await createTxbSwap(
             BigInt(action.args.amount * 1_000_000_000),
+            currentAccount?.address,
           ))!;
         } else {
           swapTxb = (await createTxbSwapOposite(
             BigInt(action.args.amount * 1_000_000_000),
+            currentAccount?.address,
           ))!;
         }
 
@@ -353,11 +355,7 @@ export const RecipeManagement = (): JSX.Element => {
       </div>
       <div className="inline-flex items-end gap-[140px] absolute top-[155px] left-[406px]">
         <div className="flex items-center justify-between w-[420px]">
-          <img
-            src="/img/deepbook.png"
-            className="h-[30px]"
-            alt=""
-          />
+          <img src="/img/deepbook.png" className="h-[30px]" alt="" />
 
           <img src="/img/aftermath.png" alt="" className="h-[30px] ml-4" />
 

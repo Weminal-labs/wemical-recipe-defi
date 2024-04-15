@@ -54,7 +54,7 @@ async function init() {
     });
 }
 
-export const createTxbSwap = async (amount: bigint) => {
+export const createTxbSwap = async (amount: bigint, walletAddress: any) => {
     await init();
 
     const route = await router?.getCompleteTradeRouteGivenAmountIn({
@@ -71,8 +71,7 @@ export const createTxbSwap = async (amount: bigint) => {
     });
 
     const tx = await router?.getTransactionForCompleteTradeRoute({
-        walletAddress:
-            "0xb4b291607e91da4654cab88e5e35ba2921ef68f1b43725ef2faeae045bf5915d",
+        walletAddress,
         completeRoute: route!,
         slippage: 0.01, // 1% max slippage
     });
@@ -80,7 +79,7 @@ export const createTxbSwap = async (amount: bigint) => {
     return tx;
 };
 
-export const createTxbSwapOposite = async (amount: bigint) => {
+export const createTxbSwapOposite = async (amount: bigint, walletAddress: any) => {
     await init();
 
     const route = await router?.getCompleteTradeRouteGivenAmountIn({
@@ -97,8 +96,7 @@ export const createTxbSwapOposite = async (amount: bigint) => {
     });
 
     const tx = await router?.getTransactionForCompleteTradeRoute({
-        walletAddress:
-            "0xb4b291607e91da4654cab88e5e35ba2921ef68f1b43725ef2faeae045bf5915d",
+        walletAddress,
         completeRoute: route!,
         slippage: 0.01, // 1% max slippage
     });
