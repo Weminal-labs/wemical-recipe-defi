@@ -16,6 +16,8 @@
     "@radix-ui/colors": "^3.0.0",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/themes": "^2.0.0",
+    "@splinetool/react-spline": "^2.2.6",
+    "@splinetool/runtime": "^1.0.94",
     "@tanstack/react-query": "^5.0.0",
     "aftermath-ts-sdk": "^1.1.53",
     "axios": "^1.6.8",

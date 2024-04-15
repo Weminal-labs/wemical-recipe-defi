@@ -9,6 +9,7 @@ import { Theme } from "@radix-ui/themes";
 import App from "./App.tsx";
 import { networkConfig } from "./networkConfig.ts";
 import { RecipeManagement } from "./pages/recipe/RecipeManagement.tsx";
+import { Home } from "./pages/Home.tsx";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +20,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <SuiClientProvider networks={networkConfig} defaultNetwork="testnet">
           <WalletProvider autoConnect>
             {/* <App /> */}
-            <RecipeManagement />
+            {/* <RecipeManagement /> */}
+            <Home />
           </WalletProvider>
         </SuiClientProvider>
       </QueryClientProvider>
