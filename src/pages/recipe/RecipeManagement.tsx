@@ -26,6 +26,7 @@ import { SwapDeepBookForm } from "../../recipe_action/deepbook/swap/SwapDeepBook
 import { WithdrawBaseForm } from "../../recipe_action/deepbook/withdraw/WithdrawBaseForm";
 import { Cetus } from "../../Cetus";
 import { Turbo } from "../../Turbo";
+import { QUOTE_COIN_TYPE, BASE_COIN_TYPE, POOL_ID, CLOCK_OBJECT_ID } from "../../constants";
 
 
 const ACTIONS = [
@@ -67,6 +68,7 @@ export const RecipeManagement = (): JSX.Element => {
 
   const [selectedAction, setSelectedAction] = useState<number>(0);
   const [actions, setActions] = useState(ACTIONS)
+  const [custodianAccount, setCustodianAccount] = useState<string>("0x43860e9fb7d0682e3d787e60144139d53054eb45f655def76874044975503656");
 
   const handleArgsForEachAction = (id: number, args: any) => {
     setActions(actions.map(action => {
@@ -88,10 +90,9 @@ export const RecipeManagement = (): JSX.Element => {
     for (let i = 0; i < actions.length; i++) {
       const action = actions[i];
       if (action.type === ActionType.SwapAftermath) {
-        // txb = (await createTxbSwap(BigInt(1_000_000_000)))!
         signAndExecute(
           {
-            transactionBlock: (await createTxbSwap(BigInt(1_000_000_000)))!,
+            transactionBlock: (await createTxbSwap(BigInt(action.args.amount * 1_000_000_000)))!,
             options: {
               showEffects: true,
               showObjectChanges: true,
@@ -100,6 +101,9 @@ export const RecipeManagement = (): JSX.Element => {
           {
             onSuccess: (tx) => {
               console.log(tx)
+
+              txb.setGasBudget(10_000_000_000n)
+
               signAndExecute(
                 {
                   transactionBlock: txb!,
@@ -124,23 +128,49 @@ export const RecipeManagement = (): JSX.Element => {
           },
         );
       } else if (action.type === ActionType.DepositDeepBook) {
+        const [coin] = txb.splitCoins(txb.gas, [action.args.amount * 1_000_000_000]);
+
         txb?.moveCall({
-          arguments: [],
-          target: `0xcab68c8cd7e80f3dd06466da6b2c083d1fd50ab3e9be8e32395c19b53021c064::counter::create`,
+          arguments: [txb.object(POOL_ID), coin, txb.object(custodianAccount)],
+          target: `${deepbookPackageId}::book::make_base_deposit`,
+          typeArguments: [BASE_COIN_TYPE, QUOTE_COIN_TYPE]
         });
+
       } else if (action.type === ActionType.SwapDeepBook) {
+        const [coin] = txb.splitCoins(txb.gas, [action.args.amount * 1_000_000_000]);
+
         txb?.moveCall({
-          arguments: [],
-          target: `${deepbookPackageId}::book::new_custodian_account`,
+          arguments: [txb.object(POOL_ID), txb.pure(100), txb.object(custodianAccount), txb.pure(1500), txb.object(coin), txb.object(CLOCK_OBJECT_ID)],
+          target: `${deepbookPackageId}::book::swap_exact_base_for_quote`,
+          typeArguments: [BASE_COIN_TYPE, QUOTE_COIN_TYPE]
         });
       }
       else if (action.type === ActionType.WithdrawBase) {
         txb?.moveCall({
-          arguments: [],
-          target: `${deepbookPackageId}::book::new_custodian_account`,
+          arguments: [txb.object(POOL_ID), txb.pure(action.args.amount * 1_000_000_000), txb.object(custodianAccount)],
+          target: `${deepbookPackageId}::book::withdraw_base`,
+          typeArguments: [BASE_COIN_TYPE, QUOTE_COIN_TYPE]
         });
       }
     }
+
+    // signAndExecute(
+    //   {
+    //     transactionBlock: txb!,
+    //     options: {
+    //       showEffects: true,
+    //       showObjectChanges: true,
+    //     },
+    //   },
+    //   {
+    //     onSuccess: (tx) => {
+    //       console.log(tx)
+    //     },
+    //     onError: (error) => {
+    //       console.log(error)
+    //     }
+    //   },
+    // );
   }
 
   // const handleExecute = async () => {
